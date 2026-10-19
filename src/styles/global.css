@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme static {
+  /* Fonts */
+  --font-display: 'Comic Neue', 'Comic Relief', cursive, system-ui, sans-serif;
+  --font-game: var(--font-display);
+
+  /* Canvas & Surfaces */
+  --color-canvas: #FAF7F2;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F5EFE6;
+  --color-surface-hover: #F7F2EB;
+  --color-surface-subtle: #F2ECE4;
+  --color-surface-disabled: #DDD6CE;
+  --color-divider: #F4EFE6;
+  --color-banner: #FEF6DE;
+
+  /* Primary */
+  --color-game-primary: #AA5A2A;
+  --color-game-primary-light: #B96634;
+  --color-game-primary-dark: #8F4317;
+  --color-game-gloss-top: #B25E2B;
+  --color-game-gloss-mid: #9C4C1D;
+  --color-game-gloss-bottom: #883E14;
+
+  /* Text & Borders */
+  --color-game-dark: #1A1615;
+  --color-game-text: #1A1615;
+  --color-game-muted: #736B63;
+  --color-game-subtle: #8C847A;
+  --color-game-brand: #94491D;
+  --color-game-border-disabled: #9E958A;
+
+  /* Letter Tile Colors */
+  --color-tile-name: #B55D29;
+  --color-tile-place: #462B1D;
+  --color-tile-animal: #386D88;
+  --color-tile-things: #2F6B4C;
+
+  /* Feedback */
+  --color-success: #1B8A44;
+  --color-danger: #C0392B;
+  --color-warning: #B87A18;
+
+  /* Type */
+  --text-micro: 9px;
+  --text-tiny: 10px;
+
+  /* Tactile / Clay Shadows */
+  --shadow-tactile-1: 0 1px 0 var(--color-game-dark);
+  --shadow-tactile-2: 0 2px 0 var(--color-game-dark);
+  --shadow-tactile-3: 0 3px 0 var(--color-game-dark);
+  --shadow-tactile-4: 0 4px 0 var(--color-game-dark);
+  --shadow-tactile-6: 0 6px 0 var(--color-game-dark);
+  --shadow-tactile-soft: 0 2px 0 rgb(26 22 21 / 0.1);
+  --shadow-modal: 0 16px 36px rgb(0 0 0 / 0.32);
+}
+
+html, body {
+  background-color: var(--color-canvas);
+  color: var(--color-game-text);
+  font-family: var(--font-display);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Glossy game button shine effect matching Figma */
+.glossy-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--color-game-gloss-top) 0%,
+    var(--color-game-gloss-mid) 48%,
+    var(--color-game-gloss-bottom) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.glossy-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.38) 0%,
+    rgba(255, 255, 255, 0.08) 75%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  pointer-events: none;
+}
+
+/* Clay tile 3D bottom bevel */
+.clay-tile {
+  box-shadow: 0 6px 0 var(--color-game-dark), 0 8px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.clay-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--color-game-dark), 0 12px 16px rgba(0, 0, 0, 0.25);
+}
+
+.clay-tile:active {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 var(--color-game-dark), 0 4px 8px rgba(0, 0, 0, 0.2);
+}
