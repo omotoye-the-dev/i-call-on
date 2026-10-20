@@ -4,6 +4,7 @@ import { clsx } from 'clsx'
 import type { RadioButtonProps } from './types.ts'
 
 export function RadioButton({
+  type = 'radio',
   label,
   checked = false,
   disabled = false,
@@ -29,7 +30,7 @@ export function RadioButton({
       <div className="relative flex items-center justify-center shrink-0">
         <input
           id={inputId}
-          type="radio"
+          type={type}
           checked={checked}
           disabled={disabled}
           onChange={onChange}

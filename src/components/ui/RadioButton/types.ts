@@ -8,6 +8,7 @@ export interface RadioOption {
 }
 
 export interface RadioButtonProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  type?: 'radio' | 'checkbox'
   label?: ReactNode
   checked?: boolean
   disabled?: boolean
@@ -15,14 +16,27 @@ export interface RadioButtonProps extends Omit<InputHTMLAttributes<HTMLInputElem
   dotColor?: string
 }
 
-export interface RadioGroupProps {
+export interface BaseRadioGroupProps {
   name: string
   options: RadioOption[]
-  value?: string
-  defaultValue?: string
-  onChange?: (value: string) => void
   label?: string
   disabled?: boolean
   columns?: 1 | 2 | 3 | 4
   className?: string
 }
+
+export interface SingleRadioGroupProps extends BaseRadioGroupProps {
+  multiple?: false
+  value?: string
+  defaultValue?: string
+  onChange?: (value: string) => void
+}
+
+export interface MultiRadioGroupProps extends BaseRadioGroupProps {
+  multiple: true
+  value?: string[]
+  defaultValue?: string[]
+  onChange?: (value: string[]) => void
+}
+
+export type RadioGroupProps = SingleRadioGroupProps | MultiRadioGroupProps

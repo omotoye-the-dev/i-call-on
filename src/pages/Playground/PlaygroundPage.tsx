@@ -28,7 +28,7 @@ import {
 } from '@/components/ui/index.ts'
 import type { LeaderboardPlayer, RadioOption } from '@/components/ui/index.ts'
 
-export function Playground(): JSX.Element {
+export function PlaygroundPage(): JSX.Element {
   // --- State for Interactive Controls ---
 
   // Alphabet state
@@ -40,7 +40,13 @@ export function Playground(): JSX.Element {
   const [roundCount, setRoundCount] = useState<number>(10)
 
   // Radio selection state
-  const [selectedCategory, setSelectedCategory] = useState<string>('name')
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([
+    'name',
+    'animal',
+    'place',
+    'things',
+  ])
+  const [standaloneChecked, setStandaloneChecked] = useState<boolean>(true)
   const [selectedTab, setSelectedTab] = useState<'this-round' | 'session'>('this-round')
 
   // Inputs state
@@ -465,30 +471,34 @@ export function Playground(): JSX.Element {
 
           <Card
             title="Game Categories Selection"
-            subtitle="Custom terracotta inner dot and dark circular boundary from Figma mockup 2"
+            subtitle="Custom terracotta inner dot and dark circular boundary with multi-selection support"
           >
             <div className="py-2">
               <RadioGroup
                 name="categories"
-                label="Select Category"
+                label="Select Categories (Multi-select)"
                 options={categoryRadioOptions}
-                value={selectedCategory}
-                onChange={setSelectedCategory}
+                multiple
+                value={selectedCategories}
+                onChange={setSelectedCategories}
                 columns={3}
               />
             </div>
 
             <div className="mt-6 pt-4 border-t-2 border-game-dark/10 flex flex-wrap items-center justify-between gap-4">
               <p className="text-sm font-bold text-game-text">
-                Active Category: <span className="text-game-primary uppercase">{selectedCategory}</span>
+                Active Categories ({selectedCategories.length}):{' '}
+                <span className="text-game-primary uppercase">
+                  {selectedCategories.length > 0 ? selectedCategories.join(', ') : 'None'}
+                </span>
               </p>
 
               <div className="flex items-center gap-4">
                 <RadioButton
                   name="demo"
-                  label="Standalone Checked"
-                  checked={true}
-                  readOnly
+                  label="Interactive Toggle"
+                  checked={standaloneChecked}
+                  onChange={(e) => setStandaloneChecked(e.target.checked)}
                 />
                 <RadioButton
                   name="demo2"
@@ -706,8 +716,9 @@ export function Playground(): JSX.Element {
                     name="lobby-categories"
                     label="Categories"
                     options={categoryRadioOptions}
-                    value={selectedCategory}
-                    onChange={setSelectedCategory}
+                    multiple
+                    value={selectedCategories}
+                    onChange={setSelectedCategories}
                     columns={3}
                   />
 
@@ -818,3 +829,6 @@ export function Playground(): JSX.Element {
     </div>
   )
 }
+
+export default PlaygroundPage
+export { PlaygroundPage as Playground }
